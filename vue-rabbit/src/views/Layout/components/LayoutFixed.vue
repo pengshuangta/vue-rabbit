@@ -2,62 +2,32 @@
 // import LayoutHeaderUl from './LayoutHeaderUl.vue'
 // vueUse
 import { useScroll } from "@vueuse/core";
-import { onMounted, ref } from 'vue'
-import {getCategoryAPI} from '@/apis/layout'
+import { onMounted, ref } from "vue";
+import { getCategoryAPI } from "@/apis/layout";
 const { y } = useScroll(window);
 
 // 定义一个响应式数据接受接口返回数据
-const cateGoryList = ref([])
+const cateGoryList = ref([]);
 
-const getCategory = async() => {
-    
-    const res = await getCategoryAPI()
-    cateGoryList.value = res.result
-    console.log(res)
-}
+const getCategory = async () => {
+  const res = await getCategoryAPI();
+  cateGoryList.value = res.result;
+  console.log(res);
+};
 
-
-onMounted( () => {
-    getCategory()
-})
-
+onMounted(() => {
+  getCategory();
+});
 </script>
 
 <template>
-  <div class="app-header-sticky" :class= "{ show: y > 78 }">
+  <div class="app-header-sticky" :class= "{show: y > 78}">
     <div class="container">
       <RouterLink class="logo" to="/" />
       <!-- 导航区域 -->
-      <ul class="app-header-nav ">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">居家</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">美食</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">服饰</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">母婴</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">个护</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">严选</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">数码</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">运动</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">杂项</RouterLink>
+      <ul class="app-header-nav">
+        <li class="home" v-for="item in cateGoryList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
 
