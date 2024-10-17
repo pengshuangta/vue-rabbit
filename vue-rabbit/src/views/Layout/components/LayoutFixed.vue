@@ -1,23 +1,12 @@
 <script setup>
-// import LayoutHeaderUl from './LayoutHeaderUl.vue'
 // vueUse
 import { useScroll } from "@vueuse/core";
-import { onMounted, ref } from "vue";
-import { getCategoryAPI } from "@/apis/layout";
+import {useCategoryStore } from "@/stores/category"
 const { y } = useScroll(window);
 
-// 定义一个响应式数据接受接口返回数据
-const cateGoryList = ref([]);
+// 使用pinia数据
+const categoryStore = useCategoryStore()
 
-const getCategory = async () => {
-  const res = await getCategoryAPI();
-  cateGoryList.value = res.result;
-  console.log(res);
-};
-
-onMounted(() => {
-  getCategory();
-});
 </script>
 
 <template>
@@ -26,7 +15,7 @@ onMounted(() => {
       <RouterLink class="logo" to="/" />
       <!-- 导航区域 -->
       <ul class="app-header-nav">
-        <li class="home" v-for="item in cateGoryList" :key="item.id">
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
