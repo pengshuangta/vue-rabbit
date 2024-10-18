@@ -24,7 +24,7 @@ const router = createRouter({
         },
         {
           // path 置空表示:当一级路由页渲染的时候,也会跟着渲染
-          path : 'category',
+          path : 'category/:id',
           component : Category,
         },
       ]
