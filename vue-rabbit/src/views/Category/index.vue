@@ -4,6 +4,7 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { getBannerAPI } from "@/apis/home";
 import GoodsItem from "@/views/Home/components/GoodsItem.vue"
+import { onBeforeRouteUpdate } from "vue-router"
 
 // 获取分类
 const route = useRoute();
@@ -16,6 +17,12 @@ const getCategory = async () => {
 onMounted(() => {
   getCategory();
 });
+
+// 在路由发生变化时,需要在重新执行获取分类
+onBeforeRouteUpdate(() =>{
+  console.log("路由变化了")
+  getCategory()
+})
 
 // 获取banner
 const bannerList = ref([]);

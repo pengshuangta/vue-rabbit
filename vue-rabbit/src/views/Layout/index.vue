@@ -19,9 +19,11 @@ onMounted( () =>{
 </script>
 
 <template>
-  <LayoutNav />
   <LayoutFixed />
+  <LayoutNav />
   <LayoutHeader />
-  <RouterView />
+  <!-- 添加key,破坏复用机制,强制重用 -->
+  <!-- <RouterView :key="$route.fullPath"/> -->
+  <RouterView /> 
   <LayoutFooter />
 </template>
