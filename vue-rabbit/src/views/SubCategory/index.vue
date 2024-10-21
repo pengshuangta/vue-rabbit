@@ -1,6 +1,18 @@
 
 <script setup>
 
+// 获取面包屑导航数据
+import {getCategoryFilterAPI} from "@/apis/category"
+import { onMounted, ref } from "vue"
+import {useRoute} from "vue-router"
+
+const route = useRoute()
+const categoryList = ref([])
+const getCategoryList = async() =>{
+  const res = await getCategoryFilterAPI(route.params.id)
+  categoryList.value = res.result
+}
+onMounted(() =>getCategoryList())
 
 </script>
 
@@ -10,9 +22,9 @@
     <div class="bread-container">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/' }">居家
+        <el-breadcrumb-item :to="{ path: `/category/${categoryList.parentId}` }">{{categoryList.parentName}}
         </el-breadcrumb-item>
-        <el-breadcrumb-item>居家生活用品</el-breadcrumb-item>
+        <el-breadcrumb-item>{{categoryList.name}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="sub-container">
