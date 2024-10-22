@@ -124,9 +124,9 @@ onMounted(() => getDetail())
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
                 <!-- 24小时榜 -->
-                <DetailHotVue />
+                <DetailHotVue :type="1"/>
                 <!-- 周榜 -->
-                <DetailHotVue />
+                <DetailHotVue :type="2"/>
             </div>
           </div>
         </div>
