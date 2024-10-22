@@ -8,6 +8,7 @@ import router from './router'
 // 引入初始化样式文件
 import '@/styles/common.scss'
 import { lazyPlugin } from './directives'
+import { componentPlugin} from './components'
 
 
 // 测试接口函数
@@ -20,6 +21,8 @@ const app = createApp(App)
 app.use(lazyPlugin)
 app.use(createPinia())
 app.use(router)
+app.use(componentPlugin)
+
 
 app.mount('#app')
 
