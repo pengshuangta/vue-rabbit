@@ -5,6 +5,7 @@ import { onMounted, ref } from 'vue'
 import {useRoute} from 'vue-router'
 import DetailHotVue from './components/DetailHot.vue'
 import ImageView from '@/components/ImageView/index.vue'
+import XtxSku from '@/components/XtxSku/index.vue'
 
 // 获取详情接口数据
 const route = useRoute()
@@ -15,6 +16,11 @@ const getDetail = async() =>{
     detailData.value = res.result
 }
 onMounted(() => getDetail())
+
+// 选择sku
+const changeSku = (sku) =>{
+  console.log(sku)
+}
 
 </script>
 
@@ -91,6 +97,7 @@ onMounted(() => getDetail())
                 </dl>
               </div>
               <!-- sku组件 -->
+              <XtxSku :goods="detailData" @change="changeSku"/>
 
               <!-- 数据组件 -->
 
