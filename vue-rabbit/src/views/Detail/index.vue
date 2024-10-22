@@ -3,7 +3,7 @@
 import {getDetailAPI} from '@/apis/detail'
 import { onMounted, ref } from 'vue'
 import {useRoute} from 'vue-router'
-
+import DetailHotVue from './components/DetailHot.vue'
 // 获取详情接口数据
 const route = useRoute()
 const detailData = ref({})
@@ -123,7 +123,10 @@ onMounted(() => getDetail())
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-
+                <!-- 24小时榜 -->
+                <DetailHotVue />
+                <!-- 周榜 -->
+                <DetailHotVue />
             </div>
           </div>
         </div>
