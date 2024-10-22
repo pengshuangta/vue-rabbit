@@ -30,7 +30,6 @@ const positionX = ref(0)
 const positionY = ref(0)
 
 watch([elementX, elementY, isOutside], () => {
-  console.log('xy变化了')
   // 如果鼠标没有移入到盒子里面 直接不执行后面的逻辑
   if (isOutside.value) return
   console.log('后续逻辑执行了')
@@ -67,7 +66,7 @@ watch([elementX, elementY, isOutside], () => {
     <div class="middle" ref="target">
       <img :src="imageList[activeIndex]" alt="" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }"></div>
+      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }" v-show="!isOutside"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
@@ -78,11 +77,11 @@ watch([elementX, elementY, isOutside], () => {
     <!-- 放大镜大图 -->
     <div class="large" :style="[
       {
-        backgroundImage: `url(${imageList[0]})`,
-        backgroundPositionX: `0px`,
-        backgroundPositionY: `0px`,
+        backgroundImage: `url(${imageList[activeIndex]})`,
+        backgroundPositionX: `${positionX}px`,
+        backgroundPositionY: `${positionY}px`,
       },
-    ]" v-show="false"></div>
+    ]" v-show="!isOutside"></div>
   </div>
 </template>
 
